@@ -6,7 +6,6 @@
 
 - Chat GPT API接続するRESTAPIを作成
 - 金融に関するデータを取得するためのRESTAPIを作成
-- Newsを取得するためのRESTAPIを作成
 
 ## 初期設定
 
@@ -29,30 +28,3 @@ DataSourceAPI $docker-compose up -d
 DataSourceAPI $ curl -X POST localhost:8002/chatGPT -H "Content-Type: application/json" -d '{"role": "user", "content": "Hello!"}'
 
 ````
-
-## 自動取引システムへの応用実装
-
-### 1.実際のニュースを外部サービスから取得 
-- News APIを利用して情報ベンダーの情報から為替の取引に関係ありそうな情報を取得する処理を確認
-- FastAPIでNewAPIからデータを取得するためのAPIを作成
-- カテゴリやニュースの抽出方法をか確認する
-`get_externalinfo.py`
-
-### 2.テキストマイニングを実施
-- 全体取り上げ単語の重要度をベクトル化するTFIDFを１で取得した情報をもとに出力する処理を確認
-- 単語に分割
-- センテンスごとの単語の重要度をベクトルで表現
-- 特に特徴があった単語を抽出
-`sentment_trader.py`
-
-### 3.ChatGPTによるセンチメント判定
-- 2の結果をもとにChatGPTを利用してセンチメントを判定する処理を確認
-- プロンプトエンジニアリングで役割や前提条件を記載する
-- ２で抽出した単語を使ってChatGPTに問い合わせる
-- 単語ごとの判断結果を集計する
-`sentment_trader.py`
-
-### 4.センチメントの結果をもとに自動で取引
-- 3の結果をもとに自動で取引する処理を確認
-- OandaAPIを利用して成行注文を行う
-`sentment_trader.py`
